@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Courses Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.hidden {
+  display: none;
+}
+
+.back {
+  margin-bottom: 20px;
+  cursor: pointer;
+  color: #38bdf8;
+}
+
+.pdf {
+  background: #1e293b;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.pdf a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Education Platform</h1>
+
+  <div id="courses" class="grid"></div>
+
+  <div id="subjects" class="hidden">
+    <div class="back" onclick="goBack('courses')">← Back</div>
+    <div id="subjectList" class="grid"></div>
+  </div>
+
+  <div id="pdfs" class="hidden">
+    <div class="back" onclick="goBack('subjects')">← Back</div>
+    <div id="pdfList"></div>
+  </div>
+</div>
+
+<script>
+const data = {
+  "1st Course": {
+    "Math": ["Topic1.pdf", "Topic2.pdf"],
+    "Economics": ["Intro.pdf"]
+  },
+  "2nd Course": {
+    "Statistics": ["Stats1.pdf"]
+  }
+};
+
+const coursesDiv = document.getElementById('courses');
+const subjectsDiv = document.getElementById('subjects');
+const pdfsDiv = document.getElementById('pdfs');
+
+const subjectList = document.getElementById('subjectList');
+const pdfList = document.getElementById('pdfList');
+
+let currentCourse = null;
+
+function renderCourses() {
+  coursesDiv.innerHTML = '';
+  Object.keys(data).forEach(course => {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerText = course;
+    div.onclick = () => openSubjects(course);
+    coursesDiv.appendChild(div);
+  });
+}
+
+function openSubjects(course) {
+  currentCourse = course;
+  coursesDiv.classList.add('hidden');
+  subjectsDiv.classList.remove('hidden');
+
+  subjectList.innerHTML = '';
+  Object.keys(data[course]).forEach(subject => {
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerText = subject;
+    div.onclick = () => openPDFs(subject);
+    subjectList.appendChild(div);
+  });
+}
+
+function openPDFs(subject) {
+  subjectsDiv.classList.add('hidden');
+  pdfsDiv.classList.remove('hidden');
+
+  pdfList.innerHTML = '';
+  data[currentCourse][subject].forEach(pdf => {
+    const div = document.createElement('div');
+    div.className = 'pdf';
+    div.innerHTML = `<a href="pdf/${pdf}" target="_blank">${pdf}</a>`;
+    pdfList.appendChild(div);
+  });
+}
+
+function goBack(target) {
+  coursesDiv.classList.add('hidden');
+  subjectsDiv.classList.add('hidden');
+  pdfsDiv.classList.add('hidden');
+
+  if (target === 'courses') {
+    coursesDiv.classList.remove('hidden');
+  } else if (target === 'subjects') {
+    subjectsDiv.classList.remove('hidden');
+  }
+}
+
+renderCourses();
+</script>
+
+</body>
+</html>

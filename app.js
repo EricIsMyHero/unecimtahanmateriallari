@@ -7,16 +7,16 @@ const data = {
     icon: "📘",
     subjects: {
       "Xətti cəbr və riyazi analiz": [
-        { name: "Xətti Cəbr və Riyazi Analiz (Q26)", file: "xcra26.pdf" }
+        { name: "Xətti Cəbr və Riyazi Analiz (Q26)", file: "xcraQ26.pdf" }
       ],
       "İKT - Baza kompüter bilikləri": [
-        { name: "İKT - Baza Kompüter Bilikləri (Q26)", file: "ikt26.pdf" }
+        { name: "İKT - Baza Kompüter Bilikləri (Q26)", file: "iktQ26.pdf" }
       ],
       "Azərbaycanın tarixi": [
-        { name: "Azərbaycanın Tarixi (Q26)", file: "aztarixi26.pdf" }
+        { name: "Azərbaycanın Tarixi (Q26)", file: "aztarixiQ26.pdf" }
       ],
       "Karyera planlaması": [
-        { name: "Karyera Planlaması (Q26)", file: "karyera26.pdf" }
+        { name: "Karyera Planlaması (Q26)", file: "karyeraQ26.pdf" }
       ],
       "Azərbaycan dilində işgüzar və akademik kommunikasiya": [
         { name: "ADİAK (Q26)", file: "adiakQ26.pdf" },

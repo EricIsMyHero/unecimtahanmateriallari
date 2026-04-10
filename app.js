@@ -20,6 +20,7 @@ const data = {
       ],
       "Azərbaycan dilində işgüzar və akademik kommunikasiya": [
         { name: "ADİAK (Q26)", file: "adiakQ26.pdf" },
+        { name: "ADİAK (Y25)", file: "adiakY25.pdf" },
         { name: "ADİAK (Y23)", file: "adiakY23.pdf" }
       ],
       "Ehtimal nəzəriyyəsi və riyazi statistika": [

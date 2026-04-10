@@ -31,6 +31,12 @@ const data = {
       ],
       "İqtisadiyyata giriş": [
         { name: "İqtisadiyyata Giriş - 1", file: "iqtisadiyyat1.pdf" }
+      ],
+      "Liner cebir ve matematiksel analiz": [
+        { name: "Liner Cebir ve Matematiksel Analiz Q26", file: "lcmaQ26.pdf" }
+      ],
+      "Azerbaycanın tarihi": [
+        { name: "Azerbaycanın Tarihi Q26", file: "aztarihiQ26.pdf" }
       ]
     }
   },

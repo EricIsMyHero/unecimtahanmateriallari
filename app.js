@@ -23,7 +23,8 @@ const data = {
         { name: "ADİAK (Y23)", file: "adiakY23.pdf" }
       ],
       "Ehtimal nəzəriyyəsi və riyazi statistika": [
-        { name: "Ehtimal Nəzəriyyəsi və Riyazi Statistika (Y25)", file: "enrsY25.pdf" }
+        { name: "Ehtimal Nəzəriyyəsi və Riyazi Statistika (Y25)", file: "enrsY25.pdf" },
+        { name: "Ehtimal Nəzəriyyəsi və Riyazi Statistika (Y23)", file: "enrsY23.pdf" }
       ],
       "Yumşaq bacarıqlar (Soft skills) Y25": [
         { name: "Soft Skills material", file: "softskillsY25.pdf" }

@@ -19,6 +19,19 @@ body {
   padding: 20px;
 }
 
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+select {
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+}
+
 h1 {
   text-align: center;
   margin-bottom: 30px;
@@ -70,29 +83,56 @@ h1 {
 <body>
 
 <div class="container">
-  <h1>Education Platform</h1>
+  <div class="topbar">
+    <div></div>
+    <select id="langSelect" onchange="changeLang()">
+      <option value="az">AZ</option>
+      <option value="en">EN</option>
+    </select>
+  </div>
+
+  <h1 id="title">Təhsil Platforması</h1>
 
   <div id="courses" class="grid"></div>
 
   <div id="subjects" class="hidden">
-    <div class="back" onclick="goBack('courses')">← Back</div>
+    <div class="back" onclick="goBack('courses')" id="back1">← Geri</div>
     <div id="subjectList" class="grid"></div>
   </div>
 
   <div id="pdfs" class="hidden">
-    <div class="back" onclick="goBack('subjects')">← Back</div>
+    <div class="back" onclick="goBack('subjects')" id="back2">← Geri</div>
     <div id="pdfList"></div>
   </div>
 </div>
 
 <script>
-const data = {
-  "1st Course": {
-    "Math": ["Topic1.pdf", "Topic2.pdf"],
-    "Economics": ["Intro.pdf"]
+let lang = 'az';
+
+const translations = {
+  az: {
+    title: 'Təhsil Platforması',
+    back: '← Geri'
   },
-  "2nd Course": {
-    "Statistics": ["Stats1.pdf"]
+  en: {
+    title: 'Education Platform',
+    back: '← Back'
+  }
+};
+
+const data = {
+  "1-ci kurs": {
+    "Riyaziyyat": ["Topic1.pdf"],
+    "İqtisadiyyat": ["Eco1.pdf"]
+  },
+  "2-ci kurs": {
+    "Statistika": ["Stats1.pdf"]
+  },
+  "3-cü kurs": {
+    "Maliyyə": ["Finance.pdf"]
+  },
+  "4-cü kurs": {
+    "Menecment": ["Manage.pdf"]
   }
 };
 
@@ -104,6 +144,13 @@ const subjectList = document.getElementById('subjectList');
 const pdfList = document.getElementById('pdfList');
 
 let currentCourse = null;
+
+function changeLang() {
+  lang = document.getElementById('langSelect').value;
+  document.getElementById('title').innerText = translations[lang].title;
+  document.getElementById('back1').innerText = translations[lang].back;
+  document.getElementById('back2').innerText = translations[lang].back;
+}
 
 function renderCourses() {
   coursesDiv.innerHTML = '';

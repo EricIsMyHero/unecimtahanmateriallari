@@ -6,8 +6,19 @@
   <title>UNEC İmtahan Materialları</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3b82f6">
 </head>
 <body>
+
+<!-- PWA Install Banner -->
+<div id="installBanner">
+  <span>📱 Bu saytı tətbiq kimi əlavə et</span>
+  <div class="banner-actions">
+    <button class="banner-btn-dismiss" onclick="dismissBanner()">Sonra</button>
+    <button class="banner-btn-install" onclick="installApp()">Əlavə et</button>
+  </div>
+</div>
 
 <div class="grid-bg"></div>
 
@@ -89,10 +100,40 @@
     <span class="footer-sep">|</span>
     <a href="https://ericismyhero.github.io/my-portfolio/" target="_blank">Əlaqə</a>
     <span class="footer-sep">|</span>
-    <a href="mailto:ericismyhero2467@gmail.com">Təklif və İradlarınız üçün</a>
+    <a href="/cdn-cgi/l/email-protection#1772657e747e647a6e7f7265782523212057707a767e7b3974787a">Təklif və İradlarınız üçün</a>
   </div>
 </footer>
-
 <script src="app.js"></script>
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+  }
+
+  let deferredPrompt;
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById("installBanner").classList.add("visible");
+  });
+
+  function installApp() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        dismissBanner();
+      });
+    }
+  }
+
+  function dismissBanner() {
+    document.getElementById("installBanner").classList.remove("visible");
+  }
+
+  window.addEventListener("appinstalled", () => {
+    dismissBanner();
+  });
+</script>
 </body>
 </html>

@@ -72,7 +72,9 @@ const data = {
         { name: "Ətraf Mühitin İqtisadiyyatı - 2 - Kollekvium", file: "emikollek2.pdf" }
       ],
       "Azərbaycan iqtisadiyyatı": [
-        { name: "Azərbaycan İqtisadiyyatı", file: "aziqt.pdf" }
+        { name: "Azərbaycan İqtisadiyyatı - 1", file: "aziqt1.pdf" },
+        { name: "Azərbaycan İqtisadiyyatı - 2", file: "aziqt2.pdf" },
+        { name: "Azərbaycan İqtisadiyyatı - 3", file: "aziqt3.pdf" }
       ],
       "Makroiqtisadiyyat": [
         { name: "Makroiqtisadiyyat - 1", file: "makroiqt1.pdf" },

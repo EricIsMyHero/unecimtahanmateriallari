@@ -53,7 +53,11 @@ const data = {
     icon: "📗",
     subjects: {
       "Mikroiqtisadiyyat": [
-        { name: "Mikroiqtisadiyyat", file: "mikroiqt.pdf" }
+        { name: "Mikroiqtisadiyyat - 1", file: "mikroiqt1.pdf" },
+        { name: "Mikroiqtisadiyyat - 1", file: "mikroiqt2.pdf" },
+        { name: "Mikroiqtisadiyyat - 1", file: "mikroiqt3.pdf" },
+        { name: "Mikroiqtisadiyyat 1 - Məsələlər", file: "mikroiqtmesele1.pdf" },
+        { name: "Mikroiqtisadiyyat 2 - Məsələlər", file: "mikroiqtmesele2.pdf" }
       ],
       "Qiymət siyasəti": [
         { name: "Qiymət Siyasəti", file: "qiymet.pdf" }
@@ -69,7 +73,7 @@ const data = {
       ],
       "Makroiqtisadiyyat": [
         { name: "Makroiqtisadiyyat - 1", file: "makroiqt1.pdf" },
-        { name: "Makroiqtisadiyyat - Məsələlər", file: "makroiqtmesele1.pdf" }
+        { name: "Makroiqtisadiyyat 1 - Məsələlər", file: "makroiqtmesele1.pdf" }
       ],
       "Maliyyə uçotu": [
         { name: "Maliyyə Uçotu", file: "maliyye.pdf" }

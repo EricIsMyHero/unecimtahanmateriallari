@@ -68,7 +68,8 @@ const data = {
         { name: "Azərbaycan İqtisadiyyatı", file: "aziqt.pdf" }
       ],
       "Makroiqtisadiyyat": [
-        { name: "Makroiqtisadiyyat", file: "makroiqt.pdf" }
+        { name: "Makroiqtisadiyyat - 1", file: "makroiqt1.pdf" },
+        { name: "Makroiqtisadiyyat - Məsələlər", file: "makroiqtmesele1.pdf" }
       ],
       "Maliyyə uçotu": [
         { name: "Maliyyə Uçotu", file: "maliyye.pdf" }

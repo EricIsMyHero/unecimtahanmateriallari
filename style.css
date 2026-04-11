@@ -535,3 +535,73 @@ h1 span {
 .footer-sep {
   opacity: 0.3;
 }
+
+/* PWA Install Banner */
+#installBanner {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: linear-gradient(135deg, #1e3a5f, #0d2a4a);
+  border-bottom: 1px solid rgba(59,130,246,0.35);
+  backdrop-filter: blur(12px);
+  color: var(--text);
+  padding: 12px 20px;
+  z-index: 9999;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.88rem;
+  flex-wrap: wrap;
+  animation: slideDown 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#installBanner.visible {
+  display: flex;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+.banner-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.banner-btn-dismiss {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: 'Arial Nova', 'Arial', sans-serif;
+  transition: all 0.2s;
+}
+
+.banner-btn-dismiss:hover {
+  background: rgba(255,255,255,0.07);
+  color: var(--text);
+}
+
+.banner-btn-install {
+  padding: 6px 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Arial Nova', 'Arial', sans-serif;
+  transition: all 0.2s;
+}
+
+.banner-btn-install:hover {
+  background: var(--accent2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59,130,246,0.4);
+}

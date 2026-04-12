@@ -1,4 +1,4 @@
-const CACHE_NAME = "unec-app-v1";
+const CACHE_NAME = "unec-app-v2";
 const urlsToCache = [
   "/unecimtahanmateriallari/",
   "/unecimtahanmateriallari/index.html",

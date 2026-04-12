@@ -128,8 +128,8 @@ const translations = {
     statCourses: "Kurs",
     statSubjects: "Fənn",
     statPdfs: "PDF",
-    noFavorites: "Hələ sevilməyən PDF yoxdur. ★ basaraq əlavə edin.",
-    footer: "Bu sayt rəsmi deyil. Yalnız tələbələrin imtahan zamanı materialları daha rahat tapması üçün hazırlanıb."
+    noFavorites: "Hələ seçilən PDF yoxdur. ★ basaraq əlavə edin.",
+    footer: "Bu sayt rəsmi deyil. Yalnız tələbələrin imtahan zamanı materialları daha rahat və əlçatan tapması üçün hazırlanıb."
   },
   en: {
     badge: "Exam Materials",

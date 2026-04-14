@@ -134,7 +134,7 @@ const translations = {
     coursesLabel: "Kurslar",
     subjectsLabel: "Fənlər",
     extrasLabel: "Əlavə Materiallar",
-    favoritesLabel: "Sevimlilər",
+    favoritesLabel: "Seçilmişlər",
     pdfsLabel: "PDF Materiallar",
     back1: "Kurslara qayıt",
     back2: "Fənlərə qayıt",
@@ -464,7 +464,7 @@ function openPDFs(subjectName) {
         <div class="pdf-meta">${pdf.file}</div>
       </div>
       <div class="pdf-actions">
-        <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('pdf/${pdf.file}', this)" title="Sevimlilərə əlavə et">
+        <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('pdf/${pdf.file}', this)" title="Seçilmişlərə əlavə et">
           ${isFav ? '★' : '☆'}
         </button>
         <a class="pdf-open-btn" href="/unecimtahanmateriallari/pdf/${pdf.file}" target="_blank">

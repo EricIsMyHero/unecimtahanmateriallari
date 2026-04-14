@@ -107,6 +107,22 @@ const data = {
   }
 };
 
+const EXTRAS_BASE = "/unecimtahanmateriallari/pdf-extra/";
+
+const extrasData = {
+  "1-ci kurs": [
+    { name: "Nümunə Material", file: "numune1.pdf", desc: "Əlavə qeydlər" }
+  ],
+  "2-ci kurs": [
+    { name: "Nümunə Material", file: "numune2.pdf", desc: "Əlavə qeydlər" }
+  ],
+  "3-cü kurs": [
+    { name: "Nümunə Material", file: "numune3.pdf", desc: "Əlavə qeydlər" }
+  ],
+  "4-cü kurs": [
+    { name: "Nümunə Material", file: "numune4.pdf", desc: "Əlavə qeydlər" }
+  ]
+};
 // ============================================================
 // TƏRCÜMƏ
 // ============================================================

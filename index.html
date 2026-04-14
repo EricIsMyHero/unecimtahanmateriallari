@@ -79,17 +79,6 @@
   </div>
 </div>
 
-<div class="search-bar-container" id="searchBarContainer">
-  <div class="search-bar-wrapper">
-    <div class="search-icon">🔍</div>
-    <input type="text" id="searchInput" placeholder="PDF axtar..." autocomplete="off">
-    <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
-  </div>
-  <div class="search-results-info" id="searchResultsInfo"></div>
-</div>
-
-
-
 <div class="container">
 
   <div id="view-home">
@@ -115,11 +104,6 @@
 
     <p class="section-label" id="label-courses">Kurslar</p>
     <div class="courses-grid" id="courses-grid"></div>
-    
-    <div id="global-search-results" class="hidden">
-      <p class="section-label" id="label-search-results">Axtarış Nəticələri</p>
-      <div class="pdf-items" id="search-results-list"></div>
-    </div>
   </div>
 
   <div id="view-subjects" class="hidden">
@@ -142,6 +126,17 @@
         ★ <span id="label-favorites">Seçilmişlər</span>
       </button>
     </div>
+
+    <!-- Search bar buradadır — tab barın altında, yalnız bu view-də görünür -->
+    <div class="search-bar-container" id="searchBarContainer">
+      <div class="search-bar-wrapper">
+        <div class="search-icon">🔍</div>
+        <input type="text" id="searchInput" placeholder="PDF axtar..." autocomplete="off">
+        <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+      </div>
+      <div class="search-results-info" id="searchResultsInfo"></div>
+    </div>
+
     <div id="tab-subjects-content">
       <div class="subjects-grid" id="subjects-grid"></div>
     </div>

@@ -1,10 +1,7 @@
 // DATA — hər fənn üçün istədiyiniz qədər PDF əlavə edə bilərsiniz
 // Format: "Fənn adı": [ {name: "Fayl adı", file: "fayl.pdf"}, ... ]
 // ============================================================
-// ============================================================
 // FƏNN HAQQINDA QEYDLƏR
-// Hər fənn üçün "?" düyməsində göstəriləcək məlumatlar
-// "Fənn adı": ["Cümlə 1", "Cümlə 2", ...]
 // ============================================================
 const subjectNotes = {
   "Xətti cəbr və riyazi analiz": [
@@ -250,6 +247,51 @@ const extrasData = {
 };
 
 // ============================================================
+// TƏŞƏKKÜRLƏr DATA
+// Yeni şəxs əlavə etmək üçün yalnız bura yazın.
+// role: 'code' — kod töhfəçisi, 'pdf' — PDF töhfəçisi
+// ============================================================
+const thanksData = [
+  { name: "Nərimanov Elnur",  initial: "E", role: "code" },
+  { name: "Şükürova Güləyar", initial: "G", role: "pdf"  },
+  { name: "Hacıyev Tofiq",    initial: "T", role: "pdf"  },
+  { name: "İslamlı Həsən",    initial: "H", role: "pdf"  }
+];
+
+function renderThanks() {
+  const ul = document.getElementById('thanks-list');
+  if (!ul) return;
+  ul.innerHTML = '';
+
+  const groups = [
+    { key: 'code', label: '💻 Kod töhfəçiləri' },
+    { key: 'pdf',  label: '📄 PDF töhfəçiləri' }
+  ];
+
+  groups.forEach(group => {
+    const people = thanksData.filter(p => p.role === group.key);
+    if (people.length === 0) return;
+
+    const header = document.createElement('li');
+    header.className = 'thanks-section-label';
+    header.textContent = group.label;
+    ul.appendChild(header);
+
+    people.forEach(p => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span class="thanks-avatar">${p.initial}</span>
+        <div class="thanks-person">
+          <span class="thanks-name">${p.name}</span>
+        </div>
+        <span class="thanks-heart">♥</span>
+      `;
+      ul.appendChild(li);
+    });
+  });
+}
+
+// ============================================================
 // TƏRCÜMƏ
 // ============================================================
 const translations = {
@@ -412,7 +454,6 @@ function goTo(view) {
   });
   document.getElementById('view-' + view).classList.remove('hidden');
 
-  // Search-i təmizlə
   clearSearch();
 
   if (view === 'home') renderCourses();
@@ -420,7 +461,7 @@ function goTo(view) {
 }
 
 // ============================================================
-// AXTARIŞ — yalnız view-subjects daxilində fənn filtri
+// AXTARIŞ
 // ============================================================
 function initSearch() {
   const searchInput = document.getElementById('searchInput');
@@ -456,7 +497,6 @@ function clearSearch() {
   }
 }
 
-// Yalnız fənn kartlarını filtr edir (view-subjects / subjects tab)
 function filterSubjects(query) {
   const grid = document.getElementById('subjects-grid');
   if (!grid) return;
@@ -523,7 +563,6 @@ function switchTab(tab) {
     document.getElementById(`tab-${t}-content`).classList.toggle('hidden', t !== tab);
   });
 
-  // Axtarışı tab dəyişdikdə sıfırla
   clearSearch();
 
   if (tab === 'favorites') renderFavorites();
@@ -650,6 +689,7 @@ function renderSubjects(courseName) {
 // TƏŞƏKKÜRLƏr MODALI
 // ============================================================
 function openThanks() {
+  renderThanks();
   document.getElementById('thanksOverlay').classList.remove('hidden');
   document.body.style.overflow = 'hidden';
 }
@@ -665,13 +705,12 @@ function closeThanksIfOutside(e) {
   }
 }
 
-// Esc ilə bağla
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeThanks();
 });
 
 // ============================================================
-// INFO PANEL — fənn haqqında qeydlər
+// INFO PANEL
 // ============================================================
 function toggleInfoPanel() {
   const panel = document.getElementById('subject-info-panel');
@@ -683,7 +722,6 @@ function closeInfoPanel() {
   if (panel) panel.classList.add('hidden');
 }
 
-// Paneli kənara klikləyərək bağla — aşağıdakı listener artıq yuxarıda təyin edilib
 document.addEventListener('click', function(e) {
   const panel = document.getElementById('subject-info-panel');
   if (panel && !panel.classList.contains('hidden') &&
@@ -700,7 +738,6 @@ function openPDFs(subjectName) {
 
   document.getElementById('bc-subject').textContent = subjectName;
 
-  // Fənn başlığı + "?" düyməsi
   const titleEl = document.getElementById('pdf-subject-title');
   const notes = subjectNotes[subjectName] || [];
   titleEl.innerHTML = `
@@ -708,7 +745,6 @@ function openPDFs(subjectName) {
     ${notes.length > 0 ? `<button class="info-btn" onclick="toggleInfoPanel()" title="Bu fənn haqqında">?</button>` : ''}
   `;
 
-  // Köhnə paneli sil, yenisini yarat
   const existing = document.getElementById('subject-info-panel');
   if (existing) existing.remove();
 

@@ -647,6 +647,30 @@ function renderSubjects(courseName) {
 }
 
 // ============================================================
+// TƏŞƏKKÜRLƏr MODALI
+// ============================================================
+function openThanks() {
+  document.getElementById('thanksOverlay').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeThanks() {
+  document.getElementById('thanksOverlay').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function closeThanksIfOutside(e) {
+  if (e.target === document.getElementById('thanksOverlay')) {
+    closeThanks();
+  }
+}
+
+// Esc ilə bağla
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeThanks();
+});
+
+// ============================================================
 // INFO PANEL — fənn haqqında qeydlər
 // ============================================================
 function toggleInfoPanel() {

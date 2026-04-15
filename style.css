@@ -882,6 +882,212 @@ h1 span {
   opacity: 0.5;
 }
 
+/* ─── Təşəkkürlər Düyməsi ──────────────────────────────────── */
+
+.thanks-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 10px;
+  color: #f59e0b;
+  font-size: 0.78rem;
+  font-family: 'Arial Nova', 'Nunito', 'Arial', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.thanks-btn:hover {
+  background: rgba(245, 158, 11, 0.22);
+  border-color: rgba(245, 158, 11, 0.55);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.2);
+}
+
+.thanks-btn svg {
+  flex-shrink: 0;
+}
+
+/* ─── Overlay ──────────────────────────────────────────────── */
+
+.thanks-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: overlayIn 0.2s ease;
+}
+
+.thanks-overlay.hidden {
+  display: none;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── Modal Kartı ──────────────────────────────────────────── */
+
+.thanks-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px 28px 28px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.88) translateY(20px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+.thanks-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.thanks-modal-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  animation: heartbeat 1.6s ease infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1);    }
+  14%       { transform: scale(1.18); }
+  28%       { transform: scale(1);    }
+  42%       { transform: scale(1.12); }
+  56%       { transform: scale(1);    }
+}
+
+.thanks-modal-title {
+  font-family: 'Arial Nova', 'Nunito', 'Arial', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text);
+  flex: 1;
+}
+
+.thanks-modal-close {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  background: var(--surface2);
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.thanks-modal-close:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+}
+
+.thanks-modal-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* ─── Siyahı ───────────────────────────────────────────────── */
+
+.thanks-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.thanks-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 16px;
+  transition: border-color 0.2s;
+}
+
+.thanks-list li:hover {
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.thanks-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+  font-family: 'Arial Nova', 'Nunito', 'Arial', sans-serif;
+}
+
+.thanks-person {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.thanks-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text);
+  font-family: 'Arial Nova', 'Nunito', 'Arial', sans-serif;
+}
+
+.thanks-role {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.thanks-heart {
+  font-size: 1rem;
+  color: #f59e0b;
+  opacity: 0.7;
+}
+
+/* ─── Footer notu ──────────────────────────────────────────── */
+
+.thanks-footer-note {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
 /* ─── Info Button & Panel ─────────────────────────────────── */
 
 .pdf-subject-title {

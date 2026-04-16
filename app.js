@@ -710,6 +710,48 @@ document.addEventListener('keydown', function(e) {
 });
 
 // ============================================================
+// EASTER EGG — logoya 3 dəfə bas
+// ============================================================
+let easterClickCount = 0;
+let easterTimer = null;
+
+function easterEggClick() {
+  easterClickCount++;
+
+  // Timer: 2 saniyə ərzində 3 dəfə basılmazsa sıfırla
+  clearTimeout(easterTimer);
+  easterTimer = setTimeout(() => {
+    easterClickCount = 0;
+  }, 2000);
+
+  if (easterClickCount >= 3) {
+    easterClickCount = 0;
+    clearTimeout(easterTimer);
+    openEaster();
+  }
+}
+
+function openEaster() {
+  document.getElementById('easterOverlay').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEaster() {
+  document.getElementById('easterOverlay').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function closeEasterIfOutside(e) {
+  if (e.target === document.getElementById('easterOverlay')) {
+    closeEaster();
+  }
+}
+
+// Esc ilə bağlamaq (mövcud keydown listener-ə əlavə edin):
+// document.addEventListener('keydown', function(e) {
+//   if (e.key === 'Escape') { closeThanks(); closeEaster(); }
+// });
+// ============================================================
 // INFO PANEL
 // ============================================================
 function toggleInfoPanel() {

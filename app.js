@@ -233,7 +233,7 @@ const EXTRAS_BASE = "/unecimtahanmateriallari/pdf-extra/";
 
 const extrasData = {
   "1-ci kurs": [
-    { name: "Nümunə Material", file: "numune1.pdf", desc: "Əlavə qeydlər" }
+    { name: "Ehtimal nəzəriyyəsi və riyazi statistika - Kollekvium", file: "enrskollektaplarla1.pdf", desc: "Bir çox testin yanında həlli yolu var" }
   ],
   "2-ci kurs": [
     { name: "Robinson Crusoe - Azərbaycan", file: "robinsonazeA2.pdf", desc: "Robinson Crusoe Azərbaycan dilindəki versiyası" }

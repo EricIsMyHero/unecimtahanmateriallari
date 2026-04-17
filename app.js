@@ -6,15 +6,15 @@
 // ============================================================
 const EXAM_NOTES = {
   test: [
-    "🖥️ Bu fənn <strong>elektron-test</strong> formatındadır.",
-    "🔀 Sualların sırası hər dəfə fərqli olur — cavabları sıraya görə deyil, mənaya görə öyrənin.",
-    "⚠️ Materialdakı cavablar köhnə ola bilər, müəllimin dediyi mövzularla müqayisə edin.",
+    "🖥️ Bu fənn <strong>Elektron-Test</strong> formatındadır.",
+    "🔀 Sualların sırası fərqli ola bilər. Cavabları sıraya görə deyil, mənaya görə öyrənin.",
+    "⚠️ Materiallardakı cavablar köhnə ola bilər, müəllimin dediyi mövzularla müqayisə edin.",
     "💡 Bütün variantları nəzərdən keçirin, tələ suallarına diqqət edin."
   ],
   yazili: [
-    "✍️ Bu fənn <strong>elektron-yazılı</strong> formatındadır.",
-    "📝 Cavablarınızı tam və əsaslandırılmış şəkildə yazın.",
-    "⚠️ Materialdakı suallar köhnə ola bilər, sillabusla mütləq uyğunlaşdırın.",
+    "✍️ Bu fənn <strong>Elektron-Yazılı</strong> formatındadır.",
+    "📝 Cavablarınızı tam, əsaslandırılmış və ən önəmlisi fərqli şəkildə yazmağa diqqət göstərin.",
+    "⚠️ Materiallardakı suallar köhnə ola bilər, sillabusunuzla mütləq uyğunlaşdırın.",
     "💡 Əlavə mənbələrdən də istifadə etməyi tövsiyə edirik."
   ]
 };
@@ -53,7 +53,7 @@ const data = {
         ]
       },
       "Xarici dildə işgüzar və akademik kommunikasiya A1": {
-        type: "yazili",
+        type: "test",
         pdfs: [
           { name: "White Death A1", file: "whitedeathA1.pdf" }
         ]
@@ -66,7 +66,7 @@ const data = {
         ]
       },
       "Xarici dildə işgüzar və akademik kommunikasiya A2": {
-        type: "yazili",
+        type: "test",
         pdfs: [
           { name: "Robinson Crusoe A2", file: "robinsoncrusoeA2.pdf" }
         ]

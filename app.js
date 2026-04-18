@@ -867,14 +867,14 @@ async function sendReport() {
   sendBtn.textContent = 'Göndərilir...';
 
   try {
-    const response = await fetch('/api/send-report', {
+    const response = await fetch('https://formspree.io/f/xjgjrkyz', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        course:  reportCourseName,
-        subject: reportSubjectName,
-        type:    type,
-        message: message
+        kurs:       reportCourseName,
+        fenn:       reportSubjectName,
+        xeta_novu:  type,
+        mexmun:     message
       })
     });
 
@@ -883,10 +883,10 @@ async function sendReport() {
       document.getElementById('report-success').classList.remove('hidden');
       setTimeout(closeReportModal, 2800);
     } else {
-      throw new Error('Server error');
+      throw new Error('Formspree error');
     }
   } catch (err) {
-    // Fallback: mailto linki aç
+    // Fallback: mailto
     const body = encodeURIComponent(
       `Kurs: ${reportCourseName}\nFənn: ${reportSubjectName}\nXəta növü: ${type}\n\n${message}`
     );

@@ -61,7 +61,7 @@ const data = {
         ]
       },
       "Ehtimal nəzəriyyəsi və riyazi statistika": {
-        type: "yazili",
+        type: "test",
         pdfs: [
           { name: "Ehtimal Nəzəriyyəsi və Riyazi Statistika Y25", file: "enrsY25.pdf" },
           { name: "Ehtimal Nəzəriyyəsi və Riyazi Statistika Y23", file: "enrsY23.pdf" }

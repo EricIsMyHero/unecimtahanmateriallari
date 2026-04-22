@@ -9,13 +9,13 @@ const EXAM_NOTES = {
     "🖥️ Bu fənn <strong>Elektron-Test</strong> formatındadır.",
     "🔀 Sualların sırası fərqli ola bilər. Cavabları sıraya görə deyil, mənaya görə öyrənin.",
     "⚠️ Materiallardakı cavablar köhnə ola bilər, müəllimin dediyi mövzularla müqayisə edin.",
-    "💡 Bütün variantları nəzərdən keçirin, tələ suallarına diqqət edin."
+    "💡 Bütün variantları nəzərdən keçirin, bəzən test tipli fənnlər yazılıya çevrilə bilər."
   ],
   yazili: [
     "✍️ Bu fənn <strong>Elektron-Yazılı</strong> formatındadır.",
     "📝 Cavablarınızı tam, əsaslandırılmış və ən önəmlisi fərqli şəkildə yazmağa diqqət göstərin.",
     "⚠️ Materiallardakı suallar köhnə ola bilər, sillabusunuzla mütləq uyğunlaşdırın.",
-    "💡 Əlavə mənbələrdən də istifadə etməyi tövsiyə edirik."
+    "💡 Əlavə mənbələrdən də istifadə etməyi tövsiyə edirik, bəzən yazılı tipli fənnlər testə çevrilə bilər."
   ]
 };
 
@@ -37,7 +37,8 @@ const data = {
       "İKT - Baza kompüter bilikləri": {
         type: "test",
         pdfs: [
-          { name: "İKT - Baza Kompüter Bilikləri Q26", file: "iktQ26.pdf" }
+          { name: "İKT - Baza Kompüter Bilikləri Q26", file: "iktQ26.pdf" },
+          { name: "İKT - Baza Kompüter Bilikləri Q25", file: "iktQ25.pdf" }
         ]
       },
       "Azərbaycanın tarixi": {
@@ -49,7 +50,8 @@ const data = {
       "Karyera planlaması": {
         type: "test",
         pdfs: [
-          { name: "Karyera Planlaması Q26", file: "karyeraQ26.pdf" }
+          { name: "Karyera Planlaması Q26", file: "karyeraQ26.pdf" },
+          { name: "Karyera Planlaması Q25", file: "karyeraQ25.pdf" }
         ]
       },
       "Xarici dildə işgüzar və akademik kommunikasiya A1": {
@@ -91,6 +93,13 @@ const data = {
           { name: "İqtisadiyyata Giriş - 1", file: "iqtisadiyyat1.pdf" }
         ]
       },
+      "Mülki müdafiə": {
+        type: "test",
+        pdfs: [
+          { name: "Mülki Müdafiə Q26", file: "mulkimudafieQ26.pdf" },
+          { name: "Mülki Müdafiə Y24", file: "mulkimudafieY24.pdf" }
+        ]
+      },
       "Liner cebir ve matematiksel analiz": {
         type: "test",
         pdfs: [
@@ -116,7 +125,13 @@ const data = {
         pdfs: [
           { name: "Yönetim ve Organizasyon Q25", file: "yonetimorganizasyonQ25.pdf" }
         ]
-      }
+      },
+      "Olasılık teorisi ve matematiksel istatistik": {
+        type: "test",
+        pdfs: [
+          { name: "Olasılık Teorisi ve Matematiksel İstatistik Y26", file: "otmiY26.pdf" }
+        ]
+      },
     }
   },
   "2-ci kurs": {
@@ -182,7 +197,13 @@ const data = {
           { name: "İqtisadi Fikir Tarixi - 2", file: "iqtfkrtrx2.pdf" },
           { name: "İqtisadi Fikir Tarixi - 3", file: "iqtfkrtrx3.pdf" }
         ]
-      }
+      },
+      "Xərclərin idarə edilməsi": {
+        type: "test",
+        pdfs: [
+          { name: "Xərclərin İdarə Edilməsi Y25", file: "xerclerY25.pdf" }
+        ]
+      },
     }
   },
   "3-cü kurs": {
@@ -213,7 +234,8 @@ const EXTRAS_BASE = "/unecimtahanmateriallari/pdf-extra/";
 
 const extrasData = {
   "1-ci kurs": [
-    { name: "Ehtimal nəzəriyyəsi və riyazi statistika - Kollekvium", file: "enrskollektaplarla1.pdf", desc: "Bir çox testin yanında həlli yolu var" }
+    { name: "Ehtimal nəzəriyyəsi və riyazi statistika - Kollekvium", file: "enrskollektaplarla1.pdf", desc: "Bir çox testin yanında həlli yolu var" },
+    { name: "Azərbaycan dilində işgüzar və akademik kommunikasiya - Test", file: "adiaktest1.pdf", desc: "ADİAK fənninə aid test" }
   ],
   "2-ci kurs": [
     { name: "Robinson Crusoe - Azərbaycan", file: "robinsonazeA2.pdf", desc: "Robinson Crusoe Azərbaycan dilindəki versiyası" }

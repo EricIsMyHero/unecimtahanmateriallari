@@ -255,7 +255,8 @@ const data = {
         semester: 1,
         pdfs: [
           { name: "Mülki Müdafiə Q26", file: "mulkimudafieQ26.pdf" },
-          { name: "Mülki Müdafiə Y24", file: "mulkimudafieY24.pdf" }
+          { name: "Mülki Müdafiə Y24", file: "mulkimudafieY24.pdf" },
+          { name: "Mülki Müdafiə Q23", file: "mulkimudafieQ23.pdf" }
         ]
       },
       "Statistika": {

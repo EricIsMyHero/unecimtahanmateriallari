@@ -606,8 +606,6 @@ function openPDFs(subjectName) {
 // ============================================================
 // SEVİMLİLƏR + CACHE
 // ============================================================
-const BASE = "/";
-const EXTRAS_BASE = "/pdf-extra/";
 
 function getFavorites() {
   return JSON.parse(localStorage.getItem("favorites")) || [];

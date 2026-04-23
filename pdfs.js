@@ -3,6 +3,10 @@
 // Hər fənnə mütləq "semester" yazın: 1 (Payız) və ya 2 (Yaz)
 // subjects altında: { type: "test", semester: 1, pdfs: [...] }
 // ============================================================
+
+const BASE = "/";
+const EXTRAS_BASE = "/pdf-extra/";
+
 const data = {
   "1-ci kurs": {
     icon: "📘",
@@ -240,8 +244,6 @@ const data = {
     }
   }
 };
-
-const EXTRAS_BASE = "/unecimtahanmateriallari/pdf-extra/";
 
 const extrasData = {
   "1-ci kurs": [

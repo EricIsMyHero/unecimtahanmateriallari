@@ -578,7 +578,7 @@ function openPDFs(subjectName) {
         <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('pdf/${pdf.file}', this)" title="Seçilmişlərə əlavə et">
           ${isFav ? '★' : '☆'}
         </button>
-        <a class="pdf-open-btn" href="/unecimtahanmateriallari/pdf/${pdf.file}" target="_blank">
+        <a class="pdf-open-btn" href="/pdf/${pdf.file}" target="_blank">
           ↗ ${t.openPdf}
         </a>
       </div>
@@ -606,7 +606,8 @@ function openPDFs(subjectName) {
 // ============================================================
 // SEVİMLİLƏR + CACHE
 // ============================================================
-const BASE = "/unecimtahanmateriallari/";
+const BASE = "/";
+const EXTRAS_BASE = "/pdf-extra/";
 
 function getFavorites() {
   return JSON.parse(localStorage.getItem("favorites")) || [];

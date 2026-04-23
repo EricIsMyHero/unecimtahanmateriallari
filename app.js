@@ -347,7 +347,8 @@ function renderExtras() {
           title="Sevimlilərə əlavə et">
           ${isFav ? '★' : '☆'}
         </button>
-        <a class="pdf-open-btn" href="${EXTRAS_BASE}${pdf.file}" target="_blank">
+        <a class="pdf-open-btn" href="${EXTRAS_BASE}${pdf.file}" target="_blank"
+   onclick="gtag('event','pdf_click',{event_category:'PDF-Extra',event_label:'${pdf.file}',value:'köməkçi'})">
           ↗ ${t.openPdf}
         </a>
       </div>
@@ -391,7 +392,8 @@ function renderFavorites() {
       </div>
       <div class="pdf-actions">
         <button class="fav-btn active" onclick="removeFavAndRefresh('${item.path}')" title="Sil">★</button>
-        <a class="pdf-open-btn" href="${BASE}${item.path}" target="_blank">↗ ${t.openPdf}</a>
+        <a class="pdf-open-btn" href="${BASE}${item.path}" target="_blank"
+   onclick="gtag('event','pdf_click',{event_category:'PDF-Favorite',event_label:'${item.path}'})">
       </div>
     `;
     list.appendChild(div);
@@ -578,7 +580,8 @@ function openPDFs(subjectName) {
         <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorite('pdf/${pdf.file}', this)" title="Seçilmişlərə əlavə et">
           ${isFav ? '★' : '☆'}
         </button>
-        <a class="pdf-open-btn" href="/pdf/${pdf.file}" target="_blank">
+        <a class="pdf-open-btn" href="/pdf/${pdf.file}" target="_blank"
+   onclick="gtag('event','pdf_click',{event_category:'PDF',event_label:'${pdf.file}',value:'əsas'})">
           ↗ ${t.openPdf}
         </a>
       </div>

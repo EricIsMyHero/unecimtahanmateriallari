@@ -1,7 +1,7 @@
 {
   "name": "UNEC İmtahan Materialları",
   "short_name": "UNEC PDF",
-  "start_url": "/unecimtahanmateriallari/",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#070d1a",

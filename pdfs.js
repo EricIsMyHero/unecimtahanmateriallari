@@ -7,6 +7,18 @@
 const BASE = "/";
 const EXTRAS_BASE = "/pdf-extra/";
 
+const PDF_TYPES = {
+  semester:  { label: "Semestr",       color: "#ef4444", bg: "rgba(239,68,68,0.12)", border: "rgba(239,68,68,0.3)" },
+  midterm:       { label: "Kollekvium",     color: "#f97316", bg: "rgba(249,115,22,0.12)", border: "rgba(249,115,22,0.3)" },
+  quiz:       { label: "Quiz",        color: "#eab308", bg: "rgba(234,179,8,0.12)", border: "rgba(234,179,8,0.3)" },
+  notes:      { label: "Qeydlər",     color: "#22c55e", bg: "rgba(34,197,94,0.12)", border: "rgba(34,197,94,0.3)" },
+  summary:    { label: "Xülasə",      color: "#06b6d4", bg: "rgba(6,182,212,0.12)", border: "rgba(6,182,212,0.3)" },
+  practice:   { label: "Praktika",    color: "#3b82f6", bg: "rgba(59,130,246,0.12)", border: "rgba(59,130,246,0.3)" },
+  reference:  { label: "Ədəbiyyat",   color: "#8b5cf6", bg: "rgba(139,92,246,0.12)", border: "rgba(139,92,246,0.3)" },
+  optional:   { label: "Əlavə",       color: "#a855f7", bg: "rgba(168,85,247,0.12)", border: "rgba(168,85,247,0.3)" },
+  old:        { label: "Köhnə",       color: "#6b7280", bg: "rgba(107,114,128,0.12)", border: "rgba(107,114,128,0.3)" }
+};
+
 const data = {
   "1-ci kurs": {
     icon: "📘",

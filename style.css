@@ -462,9 +462,31 @@ h1 span {
   word-break: break-word;
 }
 
+/* ─── PDF Number (Auto-numbering) ─────────────────────────── */
+.pdf-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, var(--accent), var(--accent3));
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: white;
+  margin-right: 8px;
+  padding: 0 7px;
+  font-family: 'Arial Nova', 'Nunito', 'Arial', sans-serif;
+  vertical-align: middle;
+}
+
 .pdf-meta {
   font-size: 0.75rem;
   color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .pdf-open-btn {
@@ -488,6 +510,22 @@ h1 span {
   background: var(--accent2);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(59,130,246,0.4);
+}
+
+/* ─── PDF Type Badge (YENI) ───────────────────────────────── */
+.pdf-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  font-family: 'Arial Nova', 'Nunito', 'Arial', sans-serif;
+  letter-spacing: 0.03em;
+  border: 1px solid;
+  flex-shrink: 0;
+  text-transform: uppercase;
 }
 
 /* Footer */
@@ -1631,6 +1669,13 @@ h1 span {
     font-size: 0.9rem;
     padding: 12px 0;
   }
+
+  .pdf-number {
+    min-width: 22px;
+    height: 22px;
+    font-size: 0.72rem;
+    padding: 0 5px;
+  }
 }
 
 /* ================================================================
@@ -2082,4 +2127,3 @@ h1 span {
 .footer-legal-link:hover {
   color: var(--accent);
 }
-

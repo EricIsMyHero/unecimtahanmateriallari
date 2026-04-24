@@ -38,9 +38,9 @@ const data = {
           { name: "White Death A1", file: "whitedeathA1.pdf" }
         ]
       },
-      "Riyaziyyat 1": {
+      "Riyaziyyat-1": {
         type: "test", semester: 1, pdfs: [
-          { name: "Riyaziyyat 1 Q24", file: "riyaziyyat1Q24.pdf" }
+          { name: "Riyaziyyat-1 Q24", file: "riyaziyyat1Q24.pdf" }
         ]
       },
       "Hidrologiya": {
@@ -104,14 +104,42 @@ const data = {
           { name: "Ümumi Ekologiya - 1", file: "umumiekologiya1.pdf" }
         ]
       },
-      "Riyaziyyat 2": {
+      "Riyaziyyat-2": {
         type: "yazili", semester: 2, pdfs: [
-          { name: "Riyaziyyat 2 Y25", file: "riyaziyyat2Y25.pdf" }
+          { name: "Riyaziyyat-2 Y25", file: "riyaziyyat2Y25.pdf" }
         ]
       },
       "Analitik kimya və instrumental analiz": {
         type: "yazili", semester: 2, pdfs: [
-          { name: "Analitik Kimya və İnstrumental Analiz - Kollekvium", file: "akiakollek1.pdf" }
+          { name: "Analitik Kimya və İnstrumental Analiz - 1 - Kollekvium", file: "akiakollek1.pdf" }
+        ]
+      },
+      "Sosial işdə idarəetmə": {
+        type: "yazili", semester: 2, pdfs: [
+          { name: "Sosial İşdə İdarəetmə - 1 - Kollekvium", file: "sosialisdeidareetmekollek1.pdf" }
+        ]
+      },
+      "Sosial iş təcrübəsində etik prinsiplər": {
+        type: "yazili", semester: 2, pdfs: [
+          { name: "Sosial İş Təcrübəsində Etik Prinsiplər - 1 - Kollekvium", file: "sitepkollek1.pdf" },
+          { name: "Sosial İş Təcrübəsində Etik Prinsiplər - 2 - Kollekvium", file: "sitepkollek2.pdf" }
+        ]
+      },
+      "Psixologiya": {
+        type: "test", semester: 2, pdfs: [
+          { name: "Psixologiya Y23", file: "psixologiyaY23.pdf" },
+          { name: "Psixologiya - 1 - Kollekvium", file: "psixologiyakollek1.pdf" }
+        ]
+      },
+    "Sosial işin nəzəriyyəsi və təcrübəsi-2": {
+        type: "yazili", semester: 2, pdfs: [
+          { name: "Sosial işin nəzəriyyəsi və təcrübəsi-2 - 1 - Semester", file: "sint1.pdf" },
+          { name: "Sosial işin nəzəriyyəsi və təcrübəsi-2 - 1 - Kollekvium", file: "sintkollek1.pdf" }
+        ]
+      },
+      "Sosial işdə riyazi metodlar": {
+        type: "test", semester: 2, pdfs: [
+          { name: "Sosial İşdə Riyazi Metodlar - 1 - Kollekvium", file: "sirmkollek1.pdf" }
         ]
       },
       "Liner cebir ve matematiksel analiz": {

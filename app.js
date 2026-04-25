@@ -392,17 +392,46 @@ function renderExtras() {
           title="Sevimlilərə əlavə et">
           ${isFav ? '★' : '☆'}
         </button>
-        <a class="pdf-open-btn" href="${EXTRAS_BASE}${pdf.file}" target="_blank"
-          onclick="showPdfLoading(false); gtag('event','pdf_click',{event_category:'PDF-Extra',event_label:'${pdf.file}',value:'köməkçi'})">
-        ↗ ${t.openPdf}
-        </a>
-        <a class="pdf-download-btn" href="${EXTRAS_BASE}${pdf.file}" download
-         onclick="showPdfLoading(true); gtag('event','pdf_download',{event_category:'PDF-Extra',event_label:'${pdf.file}'})">
-        ↓ ${t.downloadPdf}
-        </a>
+        <button class="pdf-open-btn" data-url="${EXTRAS_BASE}${pdf.file}" data-file="${pdf.file}" data-action="open" data-category="PDF-Extra">
+          ↗ ${t.openPdf}
+        </button>
+        <button class="pdf-download-btn" data-url="${EXTRAS_BASE}${pdf.file}" data-file="${pdf.file}" data-action="download" data-category="PDF-Extra">
+          ↓ ${t.downloadPdf}
+        </button>
       </div>
     `;
     list.appendChild(div);
+  });
+
+  // Event delegation
+  list.addEventListener('click', function(e) {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+
+    const url      = btn.dataset.url;
+    const file     = btn.dataset.file;
+    const action   = btn.dataset.action;
+    const category = btn.dataset.category || 'PDF-Extra';
+
+    if (action === 'open') {
+      showPdfLoading(false);
+      gtag('event', 'pdf_click', { event_category: category, event_label: file, value: 'köməkçi' });
+      setTimeout(() => {
+        window.open(url, '_blank');
+        hidePdfLoading();
+      }, 1200);
+
+    } else if (action === 'download') {
+      showPdfLoading(true);
+      gtag('event', 'pdf_download', { event_category: category, event_label: file });
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = '';
+        a.click();
+        hidePdfLoading();
+      }, 1200);
+    }
   });
 }
 
@@ -447,19 +476,47 @@ function renderFavorites() {
       </div>
       <div class="pdf-actions">
         <button class="fav-btn active" onclick="removeFavAndRefresh('${item.path}')" title="Sil">★</button>
-        <a class="pdf-open-btn" href="${BASE}${item.path}" target="_blank"
-          onclick="showPdfLoading(false); gtag('event','pdf_click',{event_category:'PDF-Favorite',event_label:'${item.path}'})">
-         ↗ ${t.openPdf}
-        </a>
-        <a class="pdf-download-btn" href="${BASE}${item.path}" download
-          onclick="showPdfLoading(true); gtag('event','pdf_download',{event_category:'PDF-Favorite',event_label:'${item.path}'})">
-         ↓ ${t.downloadPdf}
-        </a>
+        <button class="pdf-open-btn" data-url="${BASE}${item.path}" data-file="${item.path}" data-action="open" data-category="PDF-Favorite">
+          ↗ ${t.openPdf}
+        </button>
+        <button class="pdf-download-btn" data-url="${BASE}${item.path}" data-file="${item.path}" data-action="download" data-category="PDF-Favorite">
+          ↓ ${t.downloadPdf}
+        </button>
       </div>
     `;
     list.appendChild(div);
   });
-}
+
+  // Event delegation
+  list.addEventListener('click', function(e) {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+
+    const url      = btn.dataset.url;
+    const file     = btn.dataset.file;
+    const action   = btn.dataset.action;
+    const category = btn.dataset.category || 'PDF-Favorite';
+
+    if (action === 'open') {
+      showPdfLoading(false);
+      gtag('event', 'pdf_click', { event_category: category, event_label: file });
+      setTimeout(() => {
+        window.open(url, '_blank');
+        hidePdfLoading();
+      }, 1200);
+
+    } else if (action === 'download') {
+      showPdfLoading(true);
+      gtag('event', 'pdf_download', { event_category: category, event_label: file });
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = '';
+        a.click();
+        hidePdfLoading();
+      }, 1200);
+    }
+  });
 
 function removeFavAndRefresh(filePath) {
   let favs = getFavorites().filter(f => f !== filePath);

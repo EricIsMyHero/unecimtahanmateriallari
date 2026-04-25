@@ -267,6 +267,43 @@ function goTo(view) {
 }
 
 // ============================================================
+// QLOBAL EVENT DELEGATION — PDF düymələri üçün
+// ============================================================
+function handlePdfClick(e) {
+  const btn = e.target.closest('[data-action]');
+  if (!btn) return;
+
+  const url      = btn.dataset.url;
+  const file     = btn.dataset.file;
+  const action   = btn.dataset.action;
+  const category = btn.dataset.category || 'PDF';
+
+  if (action === 'open') {
+    showPdfLoading(false);
+    gtag('event', 'pdf_click', { event_category: category, event_label: file });
+    setTimeout(() => {
+      window.open(url, '_blank');
+      hidePdfLoading();
+    }, 400);
+
+  } else if (action === 'download') {
+    showPdfLoading(true);
+    gtag('event', 'pdf_download', { event_category: category, event_label: file });
+    setTimeout(() => {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '';
+      a.click();
+      hidePdfLoading();
+    }, 400);
+  }
+}
+
+document.getElementById('pdf-items').addEventListener('click', handlePdfClick);
+document.getElementById('extras-list').addEventListener('click', handlePdfClick);
+document.getElementById('favorites-list').addEventListener('click', handlePdfClick);
+
+// ============================================================
 // AXTARIŞ
 // ============================================================
 function initSearch() {
@@ -403,38 +440,6 @@ function renderExtras() {
     list.appendChild(div);
   });
 
-  // Event delegation
-  list.addEventListener('click', function(e) {
-    const btn = e.target.closest('[data-action]');
-    if (!btn) return;
-
-    const url      = btn.dataset.url;
-    const file     = btn.dataset.file;
-    const action   = btn.dataset.action;
-    const category = btn.dataset.category || 'PDF-Extra';
-
-    if (action === 'open') {
-      showPdfLoading(false);
-      gtag('event', 'pdf_click', { event_category: category, event_label: file, value: 'köməkçi' });
-      setTimeout(() => {
-        window.open(url, '_blank');
-        hidePdfLoading();
-      }, 400);
-
-    } else if (action === 'download') {
-      showPdfLoading(true);
-      gtag('event', 'pdf_download', { event_category: category, event_label: file });
-      setTimeout(() => {
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = '';
-        a.click();
-        hidePdfLoading();
-      }, 400);
-    }
-  });
-}
-
 // ============================================================
 // RENDER — SEÇİLMİŞLƏR
 // ============================================================
@@ -486,38 +491,6 @@ function renderFavorites() {
     `;
     list.appendChild(div);
   });
-
-  // Event delegation
-  list.addEventListener('click', function(e) {
-    const btn = e.target.closest('[data-action]');
-    if (!btn) return;
-
-    const url      = btn.dataset.url;
-    const file     = btn.dataset.file;
-    const action   = btn.dataset.action;
-    const category = btn.dataset.category || 'PDF-Favorite';
-
-    if (action === 'open') {
-      showPdfLoading(false);
-      gtag('event', 'pdf_click', { event_category: category, event_label: file });
-      setTimeout(() => {
-        window.open(url, '_blank');
-        hidePdfLoading();
-      }, 400);
-
-    } else if (action === 'download') {
-      showPdfLoading(true);
-      gtag('event', 'pdf_download', { event_category: category, event_label: file });
-      setTimeout(() => {
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = '';
-        a.click();
-        hidePdfLoading();
-      }, 400);
-    }
-  });
-}
 
 function removeFavAndRefresh(filePath) {
   let favs = getFavorites().filter(f => f !== filePath);
@@ -651,36 +624,6 @@ function openPDFs(subjectName) {
     list.appendChild(div);
   });
 
-  // Event delegation — bütün PDF düymələri üçün
-  list.addEventListener('click', function(e) {
-    const btn = e.target.closest('[data-action]');
-    if (!btn) return;
-
-    const url    = btn.dataset.url;
-    const file   = btn.dataset.file;
-    const action = btn.dataset.action;
-
-    if (action === 'open') {
-      showPdfLoading(false);
-      gtag('event', 'pdf_click', { event_category: 'PDF', event_label: file, value: 'əsas' });
-      setTimeout(() => {
-        window.open(url, '_blank');
-        hidePdfLoading();
-      }, 400);
-
-    } else if (action === 'download') {
-      showPdfLoading(true);
-      gtag('event', 'pdf_download', { event_category: 'PDF', event_label: file });
-      setTimeout(() => {
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = '';
-        a.click();
-        hidePdfLoading();
-      }, 400);
-    }
-  });
-  
   // Xəta Göndər düyməsi
   const reportBtn = document.createElement('button');
   reportBtn.className = 'report-error-btn';

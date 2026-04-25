@@ -582,17 +582,45 @@ function openPDFs(subjectName) {
           title="Seçilmişlərə əlavə et">
           ${isFav ? '★' : '☆'}
         </button>
-        <a class="pdf-open-btn" href="/pdf/${pdf.file}" target="_blank"
-          onclick="showPdfLoading(false); gtag('event','pdf_click',{event_category:'PDF',event_label:'${pdf.file}',value:'əsas'})">
+        <button class="pdf-open-btn" data-url="/pdf/${pdf.file}" data-file="${pdf.file}" data-action="open">
           ↗ ${t.openPdf}
-        </a>
-        <a class="pdf-download-btn" href="/pdf/${pdf.file}" download
-          onclick="showPdfLoading(true); gtag('event','pdf_download',{event_category:'PDF',event_label:'${pdf.file}'})">
+        </button>
+        <button class="pdf-download-btn" data-url="/pdf/${pdf.file}" data-file="${pdf.file}" data-action="download">
           ↓ ${t.downloadPdf}
-        </a>
+        </button>
       </div>
     `;
     list.appendChild(div);
+  });
+
+  // Event delegation — bütün PDF düymələri üçün
+  list.addEventListener('click', function(e) {
+    const btn = e.target.closest('[data-action]');
+    if (!btn) return;
+
+    const url    = btn.dataset.url;
+    const file   = btn.dataset.file;
+    const action = btn.dataset.action;
+
+    if (action === 'open') {
+      showPdfLoading(false);
+      gtag('event', 'pdf_click', { event_category: 'PDF', event_label: file, value: 'əsas' });
+      setTimeout(() => {
+        window.open(url, '_blank');
+        hidePdfLoading();
+      }, 1200);
+
+    } else if (action === 'download') {
+      showPdfLoading(true);
+      gtag('event', 'pdf_download', { event_category: 'PDF', event_label: file });
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = '';
+        a.click();
+        hidePdfLoading();
+      }, 1200);
+    }
   });
   
   // Xəta Göndər düyməsi

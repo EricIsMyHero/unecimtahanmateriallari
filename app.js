@@ -517,6 +517,7 @@ function renderFavorites() {
       }, 1200);
     }
   });
+}
 
 function removeFavAndRefresh(filePath) {
   let favs = getFavorites().filter(f => f !== filePath);

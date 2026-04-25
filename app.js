@@ -17,6 +17,47 @@ const EXAM_NOTES = {
 };
 
 // ============================================================
+// PDF YÜKLƏMƏ OVERLAY
+// ============================================================
+let pdfProgressInterval = null;
+
+function showPdfLoading(isDownload) {
+  const overlay = document.getElementById('pdfLoadingOverlay');
+  const title   = document.getElementById('pdfLoadingTitle');
+  const fill    = document.getElementById('pdfProgressFill');
+
+  title.textContent = isDownload ? 'PDF Endirilir...' : 'PDF Açılır...';
+  fill.style.width  = '5%';
+  overlay.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  let progress = 5;
+  clearInterval(pdfProgressInterval);
+  pdfProgressInterval = setInterval(() => {
+    if (progress < 85) {
+      progress += Math.random() * 8 + 2;
+      fill.style.width = Math.min(progress, 85) + '%';
+    }
+  }, 400);
+
+  setTimeout(hidePdfLoading, 6000);
+}
+
+function hidePdfLoading() {
+  const overlay = document.getElementById('pdfLoadingOverlay');
+  const fill    = document.getElementById('pdfProgressFill');
+
+  clearInterval(pdfProgressInterval);
+  fill.style.width = '100%';
+
+  setTimeout(() => {
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+    fill.style.width = '5%';
+  }, 300);
+}
+
+// ============================================================
 // TƏŞƏKKÜRLƏR DATA
 // ============================================================
 const thanksData = [
@@ -553,49 +594,6 @@ function openPDFs(subjectName) {
     `;
     list.appendChild(div);
   });
-
-  // ============================================================
-// PDF YÜKLƏMƏ OVERLAY
-// ============================================================
-let pdfProgressInterval = null;
-
-function showPdfLoading(isDownload) {
-  const overlay = document.getElementById('pdfLoadingOverlay');
-  const title   = document.getElementById('pdfLoadingTitle');
-  const fill    = document.getElementById('pdfProgressFill');
-
-  title.textContent = isDownload ? 'PDF Endirilir...' : 'PDF Açılır...';
-  fill.style.width  = '5%';
-  overlay.classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
-
-  // Progress bar animasiyası
-  let progress = 5;
-  clearInterval(pdfProgressInterval);
-  pdfProgressInterval = setInterval(() => {
-    if (progress < 85) {
-      progress += Math.random() * 8 + 2;
-      fill.style.width = Math.min(progress, 85) + '%';
-    }
-  }, 400);
-
-  // 6 saniyə sonra avtomatik bağla
-  setTimeout(hidePdfLoading, 6000);
-}
-
-function hidePdfLoading() {
-  const overlay = document.getElementById('pdfLoadingOverlay');
-  const fill    = document.getElementById('pdfProgressFill');
-
-  clearInterval(pdfProgressInterval);
-  fill.style.width = '100%';
-
-  setTimeout(() => {
-    overlay.classList.add('hidden');
-    document.body.style.overflow = '';
-    fill.style.width = '5%';
-  }, 300);
-}
   
   // Xəta Göndər düyməsi
   const reportBtn = document.createElement('button');

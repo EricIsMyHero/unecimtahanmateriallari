@@ -1,11 +1,17 @@
 export default async function handler(req, res) {
-  // CORS — GitHub Pages domeninə icazə ver
-  res.setHeader("Access-Control-Allow-Origin", "*");
-res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  // Allow the specific origin of your GitHub Pages site
+  res.setHeader('Access-Control-Allow-Origin', 'https://ericismyhero.github.io');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Preflight
-  if (req.method === "OPTIONS") return res.status(200).end();
+  // Handle the preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  // Your existing API logic goes here...
+  res.status(200).json({ message: "Success" });
+}
 
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Yalnız POST icazəlidir" });

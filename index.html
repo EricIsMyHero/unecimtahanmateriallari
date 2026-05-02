@@ -45,7 +45,7 @@
   <!-- Tema Seç -->
   <div class="sidebar-section">
     <div class="sidebar-section-label">🎨 Tema Seç</div>
-    <div class="sidebar-theme-options">
+    <div class="sidebar-theme-options" id="themeOptions">
       <button class="sidebar-theme-opt active" data-theme="ocean" onclick="applyTheme('ocean',this)">
         <span class="theme-dot" style="background:#3b82f6"></span>
         <span class="theme-dot" style="background:#06b6d4"></span>
@@ -64,26 +64,97 @@
         <span class="theme-dot" style="background:#fbbf24"></span>
         <span class="sidebar-theme-name">Sunset</span>
       </button>
-      <button class="sidebar-theme-opt" data-theme="midnight" onclick="applyTheme('midnight',this)">
+      <!-- Gizli temalar -->
+      <button class="sidebar-theme-opt theme-extra" data-theme="midnight" onclick="applyTheme('midnight',this)">
         <span class="theme-dot" style="background:#ffffff"></span>
         <span class="theme-dot" style="background:#a3a3a3"></span>
         <span class="theme-dot" style="background:#737373"></span>
         <span class="sidebar-theme-name">Midnight</span>
       </button>
-      <button class="sidebar-theme-opt" data-theme="candy" onclick="applyTheme('candy',this)">
+      <button class="sidebar-theme-opt theme-extra" data-theme="candy" onclick="applyTheme('candy',this)">
         <span class="theme-dot" style="background:#a855f7"></span>
         <span class="theme-dot" style="background:#ec4899"></span>
         <span class="theme-dot" style="background:#8b5cf6"></span>
         <span class="sidebar-theme-name">Candy</span>
       </button>
-      <button class="sidebar-theme-opt" data-theme="arctic" onclick="applyTheme('arctic',this)">
+      <button class="sidebar-theme-opt theme-extra" data-theme="arctic" onclick="applyTheme('arctic',this)">
         <span class="theme-dot" style="background:#0284c7"></span>
         <span class="theme-dot" style="background:#0ea5e9"></span>
         <span class="theme-dot" style="background:#38bdf8"></span>
         <span class="sidebar-theme-name">Arctic</span>
       </button>
     </div>
+    <button class="theme-expand-btn" id="themeExpandBtn" onclick="toggleExtraThemes()">
+      <span id="themeExpandLabel">Daha çox tema</span>
+      <svg id="themeExpandIcon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
   </div>
+
+  <style>
+    .theme-extra {
+      display: none;
+      animation: themeFadeIn 0.22s ease;
+    }
+    .theme-extra.theme-extra-visible {
+      display: flex;
+    }
+    @keyframes themeFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .theme-expand-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: 'Arial Nova', 'Nunito', Arial, sans-serif;
+      padding: 5px 10px;
+      cursor: pointer;
+      margin-top: 6px;
+      width: 100%;
+      justify-content: center;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .theme-expand-btn:hover {
+      color: var(--text);
+      border-color: rgba(59,130,246,0.4);
+    }
+    #themeExpandIcon {
+      transition: transform 0.25s ease;
+    }
+    #themeExpandIcon.rotated {
+      transform: rotate(180deg);
+    }
+  </style>
+
+  <script>
+    function toggleExtraThemes() {
+      const extras  = document.querySelectorAll('.theme-extra');
+      const icon    = document.getElementById('themeExpandIcon');
+      const label   = document.getElementById('themeExpandLabel');
+      const isOpen  = extras[0].classList.contains('theme-extra-visible');
+      extras.forEach(el => el.classList.toggle('theme-extra-visible', !isOpen));
+      icon.classList.toggle('rotated', !isOpen);
+      label.textContent = isOpen ? 'Daha çox tema' : 'Daha az tema';
+    }
+
+    // Seçili tema gizli temalardan birirsə avtomatik aç
+    (function () {
+      const saved = localStorage.getItem('theme') || 'ocean';
+      const hiddenThemes = ['midnight', 'candy', 'arctic'];
+      if (hiddenThemes.includes(saved)) {
+        document.querySelectorAll('.theme-extra').forEach(el => el.classList.add('theme-extra-visible'));
+        const icon = document.getElementById('themeExpandIcon');
+        const label = document.getElementById('themeExpandLabel');
+        if (icon)  icon.classList.add('rotated');
+        if (label) label.textContent = 'Daha az tema';
+      }
+    })();
+  </script>
 
   <div class="sidebar-divider"></div>
 

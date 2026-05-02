@@ -1,4 +1,6 @@
+// api/ask.js — Vercel Serverless Function (OpenRouter)
 export default async function handler(req, res) {
+
   const allowedOrigins = [
     'https://ericismyhero.github.io',
     'https://ericismyhero-github-io.vercel.app'
@@ -23,36 +25,36 @@ export default async function handler(req, res) {
   }
 
   try {
-    const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{
-              text: `Sen UNEC (Azərbaycan Dövlət İqtisad Universiteti) üzrə bir köməkçisən.
+    const prompt = `Sen UNEC (Azərbaycan Dövlət İqtisad Universiteti) üzrə bir köməkçisən.
 Yalnız aşağıdakı kontekst əsasında cavab ver. Kontekstdən kənar sualları rədd et.
 Kontekst:
 ${context}
-Sual: ${question}`
-            }]
-          }]
-        })
-      }
-    );
+Sual: ${question}`;
 
-    const geminiData = await geminiRes.json();
-    console.log('STATUS:', geminiRes.status);
-    console.log('GEMINI RAW:', JSON.stringify(geminiData)); // ← add this
-    const reply = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text
-    ?? 'Cavab alınmadı.';
+    const orRes = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        'HTTP-Referer': 'https://ericismyhero.github.io',
+        'X-Title': 'UNEC AI Köməkçi'
+      },
+      body: JSON.stringify({
+        model: 'mistralai/mistral-7b-instruct:free',
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
 
-    // ✅ Removed the hardcoded setHeader here — already set dynamically above
+    const orData = await orRes.json();
+    console.log('OPENROUTER RAW:', JSON.stringify(orData));
+
+    const reply = orData?.choices?.[0]?.message?.content
+      ?? 'Cavab alınmadı.';
+
     return res.status(200).json({ reply });
 
   } catch (err) {
-    console.error('Gemini error:', err);
+    console.error('OpenRouter error:', err);
     return res.status(500).json({ error: 'Server xətası' });
   }
 }

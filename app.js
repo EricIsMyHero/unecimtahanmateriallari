@@ -921,6 +921,256 @@ function closeTermsModal() {
   document.body.style.overflow = '';
 }
 
+/* ================================================================
+   support.js — Sidebar, Theme Expand, Toast, AI Widget, PWA
+   Bağlantı: <script src="support.js"></script>  (</body>-dən əvvəl)
+   ================================================================ */
+
+/* ── Tema Genişlənmə (Theme Expand) ───────────────────────── */
+function toggleExtraThemes() {
+      const extras  = document.querySelectorAll('.theme-extra');
+      const icon    = document.getElementById('themeExpandIcon');
+      const label   = document.getElementById('themeExpandLabel');
+      const isOpen  = extras[0].classList.contains('theme-extra-visible');
+      extras.forEach(el => el.classList.toggle('theme-extra-visible', !isOpen));
+      icon.classList.toggle('rotated', !isOpen);
+      label.textContent = isOpen ? 'Daha çox tema' : 'Daha az tema';
+    }
+
+    // Seçili tema gizli temalardan birirsə avtomatik aç
+    (function () {
+      const saved = localStorage.getItem('theme') || 'ocean';
+      const hiddenThemes = ['midnight', 'candy', 'arctic'];
+      if (hiddenThemes.includes(saved)) {
+        document.querySelectorAll('.theme-extra').forEach(el => el.classList.add('theme-extra-visible'));
+        const icon = document.getElementById('themeExpandIcon');
+        const label = document.getElementById('themeExpandLabel');
+        if (icon)  icon.classList.add('rotated');
+        if (label) label.textContent = 'Daha az tema';
+      }
+    })();
+
+
+/* ── Support Toast ─────────────────────────────────────────── */
+/* ── Support Toast ──────────────────────────────────────── */
+  (function () {
+    const SHOW_DELAY   = 8000;   // ilk göstərmə gecikməsi (ms)
+    const INTERVAL     = 30000;  // sonrakı göstərmələr (ms)
+    const VISIBLE_TIME = 5000;   // görünmə müddəti (ms)
+
+    let toastTimer   = null;
+    let intervalTimer = null;
+
+    function showToast() {
+      const toast = document.getElementById('supportToast');
+      if (!toast) return;
+      // reset animation
+      toast.classList.remove('st-visible');
+      void toast.offsetWidth; // reflow
+      toast.classList.add('st-visible');
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('st-visible');
+      }, VISIBLE_TIME);
+    }
+
+    function dismissToast() {
+      const toast = document.getElementById('supportToast');
+      if (toast) toast.classList.remove('st-visible');
+      clearTimeout(toastTimer);
+    }
+
+    // İlk göstərmə
+    setTimeout(showToast, SHOW_DELAY);
+
+    // Hər 30 saniyə
+    setInterval(showToast, INTERVAL);
+
+    // Globalə export et (HTML onclick üçün)
+    window.dismissToast = dismissToast;
+  })();
+
+
+/* ── AI Widget ──────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════
+     AI Widget — Vercel + Gemini backend
+     Deploy etdikdən sonra BACKEND_URL-i öz Vercel URL-inlə əvəz et
+  ══════════════════════════════════════════════════════════════ */
+  const BACKEND_URL = "https://ericismyhero-github-io.vercel.app"; // ← buraya Vercel URL-ini yaz
+
+  let aiOpen = false;
+
+  /* ── UI helpers ────────────────────────────────────────────── */
+  function toggleAI() {
+    aiOpen = !aiOpen;
+    const chat = document.getElementById('ai-chat');
+    if (aiOpen) {
+      chat.classList.add('ai-open');
+      document.getElementById('ai-input').focus();
+      if (!document.getElementById('ai-messages').children.length) {
+        addBotMsg('Salam! 👋 UNEC materialları haqqında sualını ver — cavablayayım.');
+      }
+    } else {
+      chat.classList.remove('ai-open');
+    }
+  }
+
+  function addBotMsg(text) {
+    const wrap = document.getElementById('ai-messages');
+    const div = document.createElement('div');
+    div.className = 'ai-msg bot';
+    div.textContent = text;
+    wrap.appendChild(div);
+    wrap.scrollTop = wrap.scrollHeight;
+  }
+
+  function addUserMsg(text) {
+    const wrap = document.getElementById('ai-messages');
+    const div = document.createElement('div');
+    div.className = 'ai-msg user';
+    div.textContent = text;
+    wrap.appendChild(div);
+    wrap.scrollTop = wrap.scrollHeight;
+  }
+
+  function showTyping() {
+    const wrap = document.getElementById('ai-messages');
+    const el = document.createElement('div');
+    el.className = 'ai-msg bot typing';
+    el.id = 'ai-typing';
+    el.innerHTML = '<span></span><span></span><span></span>';
+    wrap.appendChild(el);
+    wrap.scrollTop = wrap.scrollHeight;
+  }
+
+  function removeTyping() {
+    const el = document.getElementById('ai-typing');
+    if (el) el.remove();
+  }
+
+  /* ── Context Builder — pdfs.js data-sını oxuyur ───────────── */
+  function buildContext(question) {
+    if (typeof data === 'undefined') return '';
+
+    const q = question.toLowerCase();
+
+    // Bütün fənn adlarını topla, sualda keçənləri tap
+    const matched = [];
+
+    for (const [course, courseObj] of Object.entries(data)) {
+      for (const [subject, subObj] of Object.entries(courseObj.subjects || {})) {
+        const subLower = subject.toLowerCase();
+        // Sualda fənn adının hissəsi varsa uy
+        const words = subLower.split(/\s+/).filter(w => w.length > 3);
+        const hits  = words.filter(w => q.includes(w)).length;
+        if (hits > 0) {
+          const pdfNames = (subObj.pdfs || []).map(p => p.name).join(', ');
+          matched.push(
+            `Kurs: ${course} | Fənn: ${subject} | Növ: ${subObj.type} | ` +
+            `Semestr: ${subObj.semester} | Materiallar: ${pdfNames}`
+          );
+        }
+      }
+    }
+
+    if (!matched.length) {
+      // Uyğun fənn tapılmadı — bütün fənnlərin siyahısını ver
+      const allSubjects = [];
+      for (const [course, courseObj] of Object.entries(data)) {
+        for (const subject of Object.keys(courseObj.subjects || {})) {
+          allSubjects.push(`${course}: ${subject}`);
+        }
+      }
+      return `Saytda mövcud fənlər:\n${allSubjects.join('\n')}`;
+    }
+
+    return matched.join('\n');
+  }
+
+  /* ── Main send ─────────────────────────────────────────────── */
+  async function sendMessage() {
+    const input = document.getElementById('ai-input');
+    const text  = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    input.disabled = true;
+    addUserMsg(text);
+    showTyping();
+
+    // Backend hazır deyilsə (placeholder URL)
+    if (BACKEND_URL.includes('YOUR-PROJECT')) {
+      await new Promise(r => setTimeout(r, 700));
+      removeTyping();
+      addBotMsg('Backend hələ qoşulmayıb. index.html-də BACKEND_URL-i Vercel URL-inlə əvəz et.');
+      input.disabled = false;
+      input.focus();
+      return;
+    }
+
+    try {
+      const context = buildContext(text);
+
+      const res = await fetch(`${BACKEND_URL}/api/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: text, context })
+      });
+
+      removeTyping();
+
+      if (!res.ok) {
+        addBotMsg('Server xəta verdi (' + res.status + '). Bir az sonra yenidən cəhd et.');
+      } else {
+        const data_r = await res.json();
+        addBotMsg(data_r.reply || 'Cavab alınmadı.');
+      }
+    } catch (e) {
+      removeTyping();
+      addBotMsg('Bağlantı xətası. İnternet bağlantını və ya backend URL-ini yoxla.');
+    } finally {
+      input.disabled = false;
+      input.focus();
+    }
+  }
+
+  /* Enter ilə göndər */
+  document.getElementById('ai-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+
+/* ── PWA / Service Worker ───────────────────────────────────── */
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+  }
+
+  let deferredPrompt;
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById("installBanner").classList.add("visible");
+  });
+
+  function installApp() {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        dismissBanner();
+      });
+    }
+  }
+
+  function dismissBanner() {
+    document.getElementById("installBanner").classList.remove("visible");
+  }
+
+  window.addEventListener("appinstalled", () => {
+    dismissBanner();
+  });
+
 // ============================================================
 // BAŞLAT
 // ============================================================

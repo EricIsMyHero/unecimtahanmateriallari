@@ -43,8 +43,10 @@ Sual: ${question}`
     );
 
     const geminiData = await geminiRes.json();
+    console.log('STATUS:', geminiRes.status);
+    console.log('GEMINI RAW:', JSON.stringify(geminiData)); // ← add this
     const reply = geminiData?.candidates?.[0]?.content?.parts?.[0]?.text
-      ?? 'Cavab alınmadı.';
+    ?? 'Cavab alınmadı.';
 
     // ✅ Removed the hardcoded setHeader here — already set dynamically above
     return res.status(200).json({ reply });
